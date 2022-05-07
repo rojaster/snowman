@@ -103,6 +103,13 @@ public:
      *
      * \param[in] out Output stream.
      */
+    void dot(QTextStream &out) const;
+
+    /**
+     * Prints the CFG into a stream.
+     *
+     * \param[in] out Output stream.
+     */
     void print(QTextStream &out) const;
 
 private:

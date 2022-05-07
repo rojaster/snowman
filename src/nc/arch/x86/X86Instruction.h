@@ -74,7 +74,7 @@ public:
      *         representation of the instruction.
      */
     const uint8_t *bytes() const { return &bytes_[0]; }
-
+    
     virtual void print(QTextStream &out) const override;
 };
 

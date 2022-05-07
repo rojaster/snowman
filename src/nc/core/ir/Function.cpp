@@ -55,10 +55,16 @@ bool Function::isEmpty() const {
     return true;
 }
 
-void Function::print(QTextStream &out) const {
+void Function::dot(QTextStream &out) const {
     out << "subgraph cluster" << this << " {" << '\n';
-    out << CFG(basicBlocks());
+    CFG(basicBlocks()).dot(out);
     out << '}' << '\n';
+}
+
+void Function::print(QTextStream &out) const {
+    out << "\tFunction " << this << " [\n";
+    out << CFG(basicBlocks());
+    out << "\t]\n";
 }
 
 } // namespace ir

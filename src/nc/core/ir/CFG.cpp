@@ -90,15 +90,21 @@ void CFG::addConnection(const BasicBlock *predecessor, const BasicBlock *success
     predecessors_[successor].push_back(predecessor);
 }
 
-void CFG::print(QTextStream &out) const {
+void CFG::dot(QTextStream &out) const {
     foreach (const BasicBlock *basicBlock, basicBlocks()) {
-        out << *basicBlock;
+        basicBlock->dot(out);
     }
-
+    
     foreach (auto &pair, successors_) {
         foreach (const BasicBlock *successor, pair.second) {
             out << "basicBlock" << pair.first << " -> basicBlock" << successor << ';' << '\n';
         }
+    }
+}
+
+void CFG::print(QTextStream &out) const {
+    foreach (const BasicBlock *basicBlock, basicBlocks()) {
+        out << *basicBlock << '\n';
     }
 }
 

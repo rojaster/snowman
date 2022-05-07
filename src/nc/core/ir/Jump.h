@@ -101,6 +101,7 @@ public:
      */
     const JumpTarget &elseTarget() const { return elseTarget_; }
 
+    virtual void dot(QTextStream &out) const override;
     virtual void print(QTextStream &out) const override;
 
 protected:

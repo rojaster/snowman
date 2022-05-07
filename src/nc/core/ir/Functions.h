@@ -82,11 +82,19 @@ public:
     void addFunction(std::unique_ptr<Function> function);
 
     /**
-     * Prints the intermediate representation of all functions into a stream in DOT format.
+     * Prints the intermediate representation of all functions into a stream.
      *
      * \param[in] out Output stream.
      */
     void print(QTextStream &out) const;
+
+    /**
+     * Prints the intermediate representation of all functions into a stream in DOT format.
+     *
+     * \param[in] out Output stream.
+     */
+    void dot(QTextStream &out) const;
+
 };
 
 } // namespace ir

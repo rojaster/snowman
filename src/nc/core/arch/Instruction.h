@@ -90,6 +90,16 @@ public:
      * \return Address of the next instruction in memory.
      */
     ByteAddr endAddr() const { return addr_ + size_; }
+
+    /**
+     * Print representation of the object in DOT format.
+     * Essentially, just prints representation of the object.
+     * 
+     * @param out 
+     */
+    virtual void dot(QTextStream &out) const override {
+        this->print(out);
+    }
 };
 
 } // namespace arch

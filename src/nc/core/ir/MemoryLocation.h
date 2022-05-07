@@ -106,6 +106,13 @@ public:
     void print(QTextStream &out) const;
 
     /**
+     * Prints the location in DOT format into a stream.
+     *
+     * \param[in] out Output stream.
+     */
+    void dot(QTextStream &out) const;
+
+    /**
      * \param offset Offset in bits.
      * \return New memory location.
      */

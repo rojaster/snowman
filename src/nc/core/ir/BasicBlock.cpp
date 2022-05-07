@@ -154,6 +154,14 @@ std::unique_ptr<BasicBlock> BasicBlock::clone() const {
 }
 
 void BasicBlock::print(QTextStream &out) const {
+    out << "\t\tBB( " << this << " ) [\n";
+    foreach (const Statement *statement, statements()) {
+        out << "\t\t\t" << *statement << '\n';
+    }
+    out << "\t\t]\n";
+}
+
+void BasicBlock::dot(QTextStream &out) const {
     out << "basicBlock" << this << " [shape=box,label=\"";
 
     QString label;
@@ -171,7 +179,7 @@ void BasicBlock::print(QTextStream &out) const {
     ls << '\n';
 
     foreach (const Statement *statement, statements()) {
-        ls << *statement;
+        statement->dot(ls);
     }
 
     out << escapeDotString(label) << "\"];" << '\n';

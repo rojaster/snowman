@@ -133,6 +133,15 @@ class Type: public Printable {
      * \return True if the type is a pointer to a struct.
      */
     virtual bool isStructurePointer() const { return false; }
+
+    /**
+     * Print DOT representaion of the object
+     * 
+     * \param out Output Stream
+     */
+    virtual void dot(QTextStream &out) const override {
+        this->print(out);
+    }
 };
 
 } // namespace likec

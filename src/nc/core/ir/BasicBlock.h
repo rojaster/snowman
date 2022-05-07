@@ -218,11 +218,18 @@ public:
     std::unique_ptr<BasicBlock> clone() const;
 
     /**
-     * Prints the basic block and its incoming edges into a stream in DOT format.
+     * Prints the basic block and its incoming edges into a stream.
      *
      * \param out Output stream.
      */
     void print(QTextStream &out) const;
+
+    /**
+     * Prints the basic block and its incoming edges into a stream in DOT format.
+     *
+     * \param out Output stream.
+     */
+    void dot(QTextStream &out) const;
 };
 
 } // namespace ir

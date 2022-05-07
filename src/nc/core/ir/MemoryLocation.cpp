@@ -34,6 +34,10 @@ void MemoryLocation::print(QTextStream &out) const {
     out << "<" << domain_ << ":" << addr_ << ".." << (addr_ + size_ - 1) << ">";
 }
 
+void MemoryLocation::dot(QTextStream &out) const {
+    this->print(out);
+}
+
 } // namespace ir
 } // namespace core
 } // namespace nc

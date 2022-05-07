@@ -128,10 +128,14 @@ BasicBlock *Program::takeOwnership(std::unique_ptr<BasicBlock> basicBlock) {
     return result;
 }
 
-void Program::print(QTextStream &out) const {
+void Program::dot(QTextStream &out) const {
     out << "digraph Program" << this << " {" << '\n';
-    out << CFG(basicBlocks());
+    CFG(basicBlocks()).dot(out);
     out << "}" << '\n';
+}
+
+void Program::print(QTextStream &out) const {
+    out << CFG(basicBlocks());
 }
 
 } // namespace ir

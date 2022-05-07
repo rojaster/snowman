@@ -107,11 +107,18 @@ public:
     bool isEmpty() const;
 
     /**
-     * Prints the representation of the function in DOT format into a stream.
+     * Prints the representation of the function into a stream.
      *
      * \param[in] out Output stream.
      */
     void print(QTextStream &out) const;
+
+    /**
+     * Prints the representation of the function in DOT format into a stream.
+     *
+     * \param[in] out Output stream.
+     */
+    void dot(QTextStream &out) const;
 };
 
 } // namespace ir

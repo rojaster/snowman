@@ -44,15 +44,21 @@ void Functions::addFunction(std::unique_ptr<Function> function) {
     functions_.push_back(std::move(function));
 }
 
-void Functions::print(QTextStream &out) const {
+void Functions::dot(QTextStream &out) const {
     out << "digraph Functions" << this << " {" << '\n';
     out << "compound = true" << '\n';
-    
+    foreach (auto function, list()) {
+        function->dot(out);
+    }    
+    out << "}" << '\n';
+}
+
+void Functions::print(QTextStream &out) const {   
+    out << "Functions " << this << " [\n";
     foreach (auto function, list()) {
         out << *function;
     }
-
-    out << "}" << '\n';
+    out << "]\n";
 }
 
 } // namespace ir

@@ -134,6 +134,8 @@ public:
      *         false otherwise.
      */
     virtual bool isCondition() const = 0;
+
+    virtual void dot(QTextStream &out) const override { this->print(out); }
 };
 
 } // namespace cflow

@@ -65,6 +65,10 @@ void JumpTarget::setAddress(std::unique_ptr<Term> address) {
     address_ = std::move(address);
 }
 
+void JumpTarget::dot(QTextStream &out) const {
+    this->print(out);
+}
+
 void JumpTarget::print(QTextStream &out) const {
     if (address()) {
         out << "address " << *address();

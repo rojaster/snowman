@@ -143,7 +143,8 @@ void help() {
          << "  --print-symbols[=FILE]      Print the symbols from the executable file." << '\n'
          << "  --print-instructions[=FILE] Print parsed instructions to the file." << '\n'
          << "  --print-cfg[=FILE]          Print control flow graph in DOT language to the file." << '\n'
-         << "  --print-ir[=FILE]           Print intermediate representation in DOT language to the file." << '\n'
+         << "  --print-ir[=FILE]           Print intermediate representation into the file." << '\n'
+         << "  --print-dot[=FILE]          Print intermediate representation in DOT format to the file." << '\n'
          << "  --print-regions[=FILE]      Print results of structural analysis in DOT language to the file." << '\n'
          << "  --print-cxx[=FILE]          Print reconstructed program into given file." << '\n'
          << "  --from[=ADDR]               From disassemble boundary." << '\n'
@@ -180,6 +181,7 @@ int main(int argc, char *argv[]) {
         QString instructionsFile;
         QString cfgFile;
         QString irFile;
+        QString dotFile;
         QString regionsFile;
         QString cxxFile;
         nc::ByteAddr from_addr = 0;
@@ -221,6 +223,7 @@ int main(int argc, char *argv[]) {
             FILE_OPTION("--print-instructions", instructionsFile)
             FILE_OPTION("--print-cfg", cfgFile)
             FILE_OPTION("--print-ir", irFile)
+            FILE_OPTION("--print-dot", dotFile)
             FILE_OPTION("--print-regions", regionsFile)
             FILE_OPTION("--print-cxx", cxxFile)
             ADDR_OPTION("--from", from_addr)
@@ -279,13 +282,19 @@ int main(int argc, char *argv[]) {
 
             openFileForWritingAndCall(instructionsFile, [&](QTextStream &out) { context.instructions()->print(out); });
 
-            if (!cfgFile.isEmpty() || !irFile.isEmpty() || !regionsFile.isEmpty() || !cxxFile.isEmpty()) {
+            if (!cfgFile.isEmpty()     || 
+                !irFile.isEmpty()      || 
+                !dotFile.isEmpty()     || 
+                !regionsFile.isEmpty() || 
+                !cxxFile.isEmpty()) 
+            {
                 nc::core::Driver::decompile(context);
 
-                openFileForWritingAndCall(cfgFile,     [&](QTextStream &out) { context.program()->print(out); });
+                openFileForWritingAndCall(cfgFile,     [&](QTextStream &out) { context.program()->print(out);   });
                 openFileForWritingAndCall(irFile,      [&](QTextStream &out) { context.functions()->print(out); });
+                openFileForWritingAndCall(dotFile,     [&](QTextStream &out) { context.functions()->dot(out);   });
                 openFileForWritingAndCall(regionsFile, [&](QTextStream &out) { printRegionGraphs(context, out); });
-                openFileForWritingAndCall(cxxFile,     [&](QTextStream &out) { context.tree()->print(out); });
+                openFileForWritingAndCall(cxxFile,     [&](QTextStream &out) { context.tree()->print(out);      });
             }
         }
     } catch (const nc::Exception &e) {

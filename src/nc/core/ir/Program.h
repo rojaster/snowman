@@ -150,11 +150,18 @@ public:
     bool isCalledAddress(ByteAddr addr) const { return nc::contains(calledAddresses_, addr); }
 
     /**
-     * Prints the graph into a stream in DOT format.
+     * Prints the graph into a stream.
      *
      * \param out Output stream.
      */
     void print(QTextStream &out) const;
+
+    /**
+     * Prints the graph into a stream in DOT format.
+     *
+     * \param out Output stream.
+     */
+    void dot(QTextStream &out) const;
 
 private:
     /**

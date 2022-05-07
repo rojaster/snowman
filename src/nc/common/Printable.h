@@ -30,15 +30,32 @@
 namespace nc {
 
 /**
- * Base class for printable objects. The objects must have
+ * Base class for printable objects. 
+ * 
+ * The objects must have
  * void print(QTextStream &) const method which will be called
  * by the respective << operator.
  *
+ * The objects must have void dot(QTextStream &) const method
+ * which might be called directly.
+ * 
+ * @Cleanup(alekum):
+ * Consider to separate dot print and plain print to support
+ * resprective << operator.
+ * 
  * \tparam T Derived class.
  */
 template<class T>
 class PrintableBase {
     public:
+    /**
+     * Prints the object dot reprsentation to stream
+     *  
+     * \param out Output QT stream 
+     */
+    void dot(QTextStream &out) const {
+        static_cast<const T*>(this)->dot(out);
+    }
 
     /**
      * Prints the object into a stream.
@@ -76,6 +93,13 @@ class Printable: public PrintableBase<Printable> {
      * \param out Output stream.
      */
     virtual void print(QTextStream &out) const = 0;
+    
+    /**
+     * Prints the object dot representation into a stream
+     * 
+     * \param out Output stream.
+     */
+    virtual void dot(QTextStream &out) const = 0;
 
     /**
      * Virtual destructor.

@@ -168,6 +168,17 @@ public:
     inline const UnaryOperator *asUnaryOperator() const;
     inline const BinaryOperator *asBinaryOperator() const;
 
+
+    /**
+     * Print representation in dot format.
+     * Essentially, just prints representaion of the object. 
+     * 
+     * \param out Output stream 
+     */
+    virtual void dot(QTextStream &out) const override {
+        this->print(out);
+    }
+
 protected:
     /**
      * \return Valid pointer to the clone of this term.

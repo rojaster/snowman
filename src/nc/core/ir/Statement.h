@@ -145,6 +145,16 @@ public:
     inline const Touch *asTouch() const;
     inline const Callback *asCallback() const;
     
+    /**
+     * Prints text representation of the object.
+     * In Dot format. 
+     * 
+     * \param out Output stream 
+     */
+    virtual void dot(QTextStream &out) const override {
+        this->print(out);
+    }
+
 protected:
     /**
      * \return Valid pointer to the clone of the statement.

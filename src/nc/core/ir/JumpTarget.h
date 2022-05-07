@@ -188,6 +188,13 @@ public:
      * \param out Output stream.
      */
     void print(QTextStream &out) const;
+
+    /**
+     * Prints the textual representation of the jump target in DOT format to the stream.
+     *
+     * \param out Output stream.
+     */
+    void dot(QTextStream &out) const;
 };
 
 } // namespace ir
